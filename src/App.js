@@ -47,8 +47,8 @@ function App() {
         console.log(response.data);
         setWeatherInfo(response.data);
       })
-      .catch((error) => {
-        console.error(error.message);
+      .catch(() => {
+        alert("Location not found");
       });
   };
 
@@ -56,8 +56,6 @@ function App() {
     const determineImage = () => {
       if (weatherInfo?.weather[0].main === "Clouds") {
         setImage(Clouds);
-      } else if (weatherInfo?.weather[0].main === "Haze") {
-        setImage(Haze);
       } else if (weatherInfo?.main.temp < 10) {
         setImage(Cold);
       } else if (weatherInfo?.main.temp >= 10) {
