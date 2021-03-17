@@ -3,18 +3,27 @@ import "./App.css";
 import axios from "axios";
 import moment from "moment";
 import Data from "./Data";
-import Sun from "./Sun.png";
 import SearchIcon from "@material-ui/icons/Search";
+import Cold from "./images/Cold.png";
+import Hot from "./images/Hot.png";
+import Clouds from "./images/Clouds.png";
+import Haze from "./images/Haze.png";
 
 function App() {
   const [weatherInfo, setWeatherInfo] = useState(null);
   const inputRef = useRef(null);
   const time = new Date().toLocaleTimeString().slice(0, -6);
+  const [image, setImage] = useState("");
   const degree = <sup>°C</sup>;
 
   useEffect(() => {
     fetchWeatherInfo();
   }, []);
+
+  
+    useEffect(() => {
+      determineImage();
+    }, [weatherInfo]);
 
   const fetchWeatherInfo = (e) => {
     e?.preventDefault();
@@ -43,6 +52,19 @@ function App() {
       });
   };
 
+
+    const determineImage = () => {
+      if (weatherInfo?.weather[0].main === "Clouds") {
+        setImage(Clouds);
+      } else if (weatherInfo?.weather[0].main === "Haze") {
+        setImage(Haze);
+      } else if (weatherInfo?.main.temp < 10) {
+        setImage(Cold);
+      } else if (weatherInfo?.main.temp >= 10) {
+        setImage(Hot);
+      }
+    };
+
   return (
     <div className="app">
       <div className="app__container">
@@ -62,7 +84,7 @@ function App() {
               Show me the weather
             </button>
           </form>
-          <img src={Sun} alt="sun logo" />
+          <img className="app__left--image" src={image} alt="weather image" />
           <p className="app__temp">
             {weatherInfo?.main.temp}
             {degree}

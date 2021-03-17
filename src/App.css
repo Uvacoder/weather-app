@@ -36,6 +36,11 @@
   display: none;
 }
 
+.app__left--image {
+  margin-left: 20px;
+  width: 200px;
+}
+
 .app__right {
   display: flex;
   background-color: #f6f6f8;
