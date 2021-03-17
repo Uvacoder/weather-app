@@ -1,4 +1,6 @@
 .data {
+  display: flex;
+  flex-direction: column;
   background-color: white;
   margin: 10px;
   border-radius: 10px;
@@ -10,10 +12,18 @@
   color: grey;
   font-size: 16px;
   font-weight: 400;
-  margin: 5px;
 }
 
 .data__stat {
   text-align: center;
-  padding: 20px;
+  padding: 15px;
+}
+
+.data__bottom {
+  display: flex;
+}
+
+.data__bottom > img {
+  height: 120px;
+  margin-left: 10px;
 }

@@ -7,7 +7,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import Cold from "./images/Cold.png";
 import Hot from "./images/Hot.png";
 import Clouds from "./images/Clouds.png";
-import Haze from "./images/Haze.png";
+import Arrow from "./images/Arrow.png";
+
 
 function App() {
   const [weatherInfo, setWeatherInfo] = useState(null);
@@ -36,7 +37,7 @@ function App() {
         units: "metric",
       },
       headers: {
-        "x-rapidapi-key": "ad8ebf5d55mshe43140ef9f3eea4p1aa66bjsnf7b60b381da4",
+        "x-rapidapi-key": "d15ad212bbmsh4631c0af8dd24dbp1448c0jsn3820b2585726",
         "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
       },
     };
@@ -110,9 +111,17 @@ function App() {
             />
             <Data
               title="Sunrise & Sunset"
+              hasImage={true}
               stat1={moment.unix(weatherInfo?.sys?.sunrise).format("LT")}
               stat2={moment.unix(weatherInfo?.sys?.sunset).format("LT")}
-              image="https://o.remove.bg/downloads/be7fe0c8-03e6-4f82-a9a5-28cc059426e2/image-removebg-preview.png"
+              image={Arrow}
+            />
+            <Data
+              title="Min & Max Temperature"
+              hasImage={true}
+              stat1={`${weatherInfo?.main.temp_max}`}
+              stat2={`${weatherInfo?.main.temp_min}`}
+              image={Arrow}
             />
             <Data title="Humidity" stat1={`${weatherInfo?.main.humidity}`} />
             <Data title="Visibility" stat1={`${weatherInfo?.visibility} m`} />
