@@ -22,8 +22,3 @@
 .data__bottom {
   display: flex;
 }
-
-.data__bottom > img {
-  height: 120px;
-  margin-left: 10px;
-}

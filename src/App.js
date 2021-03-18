@@ -86,10 +86,12 @@ function App() {
             </button>
           </form>
           <img className="app__left--image" src={image} alt="weather image" />
-          <p className="app__temp">
-            {weatherInfo?.main.temp}
-            {degree}
-          </p>
+          <div classname="app__temp">
+            <p className="app__left--temp">
+              {weatherInfo?.main.temp}
+              {degree}
+            </p>
+          </div>
           <h3 className="app__left--date">
             {weatherInfo && `${moment.unix(weatherInfo?.dt).format("dddd")}`},
             <span className="app__left--time"> {weatherInfo && time}</span>
@@ -113,17 +115,13 @@ function App() {
             />
             <Data
               title="Sunrise & Sunset"
-              hasImage={true}
               stat1={moment.unix(weatherInfo?.sys?.sunrise).format("LT")}
               stat2={moment.unix(weatherInfo?.sys?.sunset).format("LT")}
-              image={Arrow}
             />
             <Data
               title="Min & Max Temperature"
-              hasImage={true}
               stat1={maxTemp}
               stat2={minTemp}
-              image={Arrow}
             />
             <Data title="Humidity" stat1={`${weatherInfo?.main.humidity}`} />
             <Data title="Visibility" stat1={`${weatherInfo?.visibility} m`} />
