@@ -36,5 +36,18 @@
 }
 
 .data__bottom {
+  flex-direction: row;
   display: flex;
+}
+
+.MuiSvgIcon-root {
+  height: inherit;
+}
+
+
+.data_statArrowIcon {
+  color: white;
+  background: radial-gradient(yellow, orange);
+  width: 5px;
+  border-radius: 20px;
 }

@@ -10,16 +10,16 @@ function Data({ title, stat1, stat2, hasIcon }) {
       <div className="data__bottom">
         <div>
           {hasIcon ? (
-            <div classname="data__statDiv">
-              <ArrowUpwardRoundedIcon />
+            <div className="data__statDiv">
+              <ArrowUpwardRoundedIcon className="data_statArrowIcon" />
               <h4 className="data__stat">{stat1}</h4>
             </div>
           ) : (
             <h4 className="data__stat">{stat1}</h4>
           )}
           {hasIcon ? (
-             <div classname="data__statDiv">
-              <ArrowDownwardRoundedIcon />
+            <div className="data__statDiv">
+              <ArrowDownwardRoundedIcon className="data_statArrowIcon" />
               <h4 className="data__stat">{stat2}</h4>
             </div>
           ) : (
