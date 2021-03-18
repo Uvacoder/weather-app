@@ -99,9 +99,6 @@
   margin: 20px;
 }
 
-.app__temp {
-}
-
 @media (max-width: 768px) {
   .app__container {
     flex-direction: column;
