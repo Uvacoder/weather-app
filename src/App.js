@@ -16,6 +16,8 @@ function App() {
   const time = new Date().toLocaleTimeString().slice(0, -6);
   const [image, setImage] = useState("");
   const degree = <sup>°C</sup>;
+  const minTemp = <p>{weatherInfo?.main.temp_min} {degree}</p>
+  const maxTemp = <p>{weatherInfo?.main.temp_max} {degree}</p>
 
   useEffect(() => {
     fetchWeatherInfo();
@@ -119,8 +121,8 @@ function App() {
             <Data
               title="Min & Max Temperature"
               hasImage={true}
-              stat1={`${weatherInfo?.main.temp_max}`}
-              stat2={`${weatherInfo?.main.temp_min}`}
+              stat1={maxTemp}
+              stat2={minTemp}
               image={Arrow}
             />
             <Data title="Humidity" stat1={`${weatherInfo?.main.humidity}`} />
