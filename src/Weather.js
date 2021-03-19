@@ -3,9 +3,6 @@ import axios from "axios";
 import moment from "moment";
 import Data from "./Data";
 import SearchIcon from "@material-ui/icons/Search";
-import Cold from "./images/Cold.png";
-import Hot from "./images/Hot.png";
-import Clouds from "./images/Clouds.png";
 import "./Weather.css";
 
 function Weather() {
@@ -24,6 +21,8 @@ function Weather() {
       {weatherInfo?.main.temp_max} {degree}
     </p>
   );
+  const iconcode = weatherInfo?.weather[0].icon;
+  const iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
 
   useEffect(() => {
     fetchWeatherInfo();
@@ -40,7 +39,7 @@ function Weather() {
       method: "GET",
       url: "https://community-open-weather-map.p.rapidapi.com/weather",
       params: {
-        q: inputRef.current.value || "Kolkata",
+        q: inputRef.current.value || "London",
         units: "metric",
       },
       headers: {
@@ -61,13 +60,10 @@ function Weather() {
   };
 
   const determineImage = () => {
-      if (weatherInfo?.main.temp < 10) {
-        setImage(Cold);
-      } else if (weatherInfo?.weather[0].main === "Clouds") {
-        setImage(Clouds);
-      } else if (weatherInfo?.main.temp >= 10) {
-        setImage(Hot);
-      }
+      
+      setImage(
+        `http://openweathermap.org/img/wn/${weatherInfo?.weather[0].icon}@2x.png`
+      );
   };
 
   return (
@@ -89,7 +85,7 @@ function Weather() {
               Show me the weather
             </button>
           </form>
-          <img className="weather__leftImage" src={image} alt="weather image" />
+          <img className="weather__leftImage" src={image} alt="weather" />
           <div className="weather__temp">
             <p className="weather__leftTemp">
               {weatherInfo?.main.temp}
@@ -111,17 +107,21 @@ function Weather() {
         </div>
 
         <div className="weather__right">
-          <h1 className="weather__title">Today's Highlights</h1>
+          <h1 className="weather__title">
+            Today's Highlights
+          </h1>
           <div className="weather__rightInfo">
             <Data
               title="Wind Status"
               stat1={`${weatherInfo?.wind?.speed} km/h`}
+              imageIcon="https://img.icons8.com/pastel-glyph/64/000000/wind--v1.png"
             />
             <Data
               title="Sunrise & Sunset"
-              hasIcon={true}
+              imageIcon="https://img.icons8.com/emoji/48/000000/sunrise-over-mountains.png"
               stat1={moment.unix(weatherInfo?.sys?.sunrise).format("LT")}
               stat2={moment.unix(weatherInfo?.sys?.sunset).format("LT")}
+              imageIcon2="https://img.icons8.com/cotton/64/000000/sunset--v2.png"
             />
             <Data
               title="Min & Max Temperature"
@@ -129,9 +129,21 @@ function Weather() {
               stat1={maxTemp}
               stat2={minTemp}
             />
-            <Data title="Humidity" stat1={`${weatherInfo?.main.humidity}`} />
-            <Data title="Visibility" stat1={`${weatherInfo?.visibility} m`} />
-            <Data title="Pressure" stat1={`${weatherInfo?.main.pressure}`} />
+            <Data
+              imageIcon="https://img.icons8.com/officel/40/000000/humidity.png"
+              title="Humidity"
+              stat1={`${weatherInfo?.main.humidity}`}
+            />
+            <Data
+              imageIcon="https://static.thenounproject.com/png/122738-200.png"
+              title="Visibility"
+              stat1={`${weatherInfo?.visibility} m`}
+            />
+            <Data
+              imageIcon="https://img.icons8.com/officel/80/000000/pressure.png"
+              title="Pressure"
+              stat1={`${weatherInfo?.main.pressure}`}
+            />
           </div>
         </div>
       </div>
