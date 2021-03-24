@@ -7,7 +7,7 @@
 .weather__container {
   display: flex;
   margin: auto;
-  margin-top: 20vh;
+  margin-top: 15vh;
   width: 80%;
 }
 
@@ -123,6 +123,7 @@
 @media (max-width: 800px) {
   .weather__container {
     flex-direction: column;
+    margin-top: 5vh;
   }
   .weather__left {
     border-radius: 20px 20px 0px 0px;
