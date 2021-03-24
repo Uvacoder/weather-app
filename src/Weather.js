@@ -4,13 +4,15 @@ import moment from "moment";
 import Data from "./Data";
 import SearchIcon from "@material-ui/icons/Search";
 import "./Weather.css";
+import Clouds from "./images/Clouds.jpg";
 
 function Weather() {
   const [weatherInfo, setWeatherInfo] = useState(null);
+  const [background, setBackground] = useState(Clouds);
   const inputRef = useRef(null);
   const time = new Date().toLocaleTimeString().slice(0, -6);
   const [image, setImage] = useState("");
-  const degree = <sup>°C</sup>;
+  const degree = <sup>°C</sup>
   const minTemp = (
     <p>
       {weatherInfo?.main.temp_min} {degree}
@@ -21,12 +23,14 @@ function Weather() {
       {weatherInfo?.main.temp_max} {degree}
     </p>
   );
-  const iconcode = weatherInfo?.weather[0].icon;
-  const iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
 
   useEffect(() => {
     fetchWeatherInfo();
   }, []);
+
+  useEffect(() => {
+    backgroundImage();
+  }, [weatherInfo]);
 
   useEffect(() => {
     determineImage();
@@ -43,7 +47,7 @@ function Weather() {
         units: "metric",
       },
       headers: {
-        "x-rapidapi-key": "b10ea1fa00msh03a7f8d5ea02bf2p13ea78jsnd742937de3db",
+        "x-rapidapi-key": "b5dc204a21mshf6a6ec9b8a55132p1b1cb9jsn7e1d1a8256a4",
         "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
       },
     };
@@ -51,7 +55,6 @@ function Weather() {
     axios
       .request(options)
       .then((response) => {
-        console.log(response.data);
         setWeatherInfo(response.data);
       })
       .catch(() => {
@@ -60,14 +63,33 @@ function Weather() {
   };
 
   const determineImage = () => {
-      
-      setImage(
-        `http://openweathermap.org/img/wn/${weatherInfo?.weather[0].icon}@2x.png`
-      );
+    setImage(
+      `http://openweathermap.org/img/wn/${weatherInfo?.weather[0].icon}@2x.png`
+    );
+  };
+
+  const backgroundImage = (e) => {
+    e?.preventDefault();
+
+    const options = {
+      method: "GET",
+      url: `https://api.unsplash.com/search/photos/?page=1&query=${weatherInfo?.weather[0].main}&client_id=eRib5ypsOLGSG3A8iBTX8rdnO78zeLLfSNgVyHHxZEA`,
+    };
+
+    axios
+      .request(options)
+      .then((response) => {
+        setBackground(
+          response.data.results[Math.floor(Math.random() * 9 + 1)].urls.full
+        );
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
   return (
-    <div className="weather">
+    <div className="weather" style={{ backgroundImage: `url(${background})` }}>
       <div className="weather__container">
         <div className="weather__left">
           <form>
@@ -108,8 +130,8 @@ function Weather() {
 
         <div className="weather__right">
           <h1 className="weather__title">
-            Today's Highlights
-          </h1>
+            <center>Today's Highlights</center>
+            </h1>
           <div className="weather__rightInfo">
             <Data
               title="Wind Status"
@@ -137,7 +159,7 @@ function Weather() {
             <Data
               imageIcon="https://static.thenounproject.com/png/122738-200.png"
               title="Visibility"
-              stat1={`${weatherInfo?.visibility} m`}
+              stat1={`${weatherInfo?.visibility / 1000} km`}
             />
             <Data
               imageIcon="https://img.icons8.com/officel/80/000000/pressure.png"

@@ -4,12 +4,16 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: #fff;
   margin: 10px;
   margin-top: 0px;
   padding-top: 0px;
   border-radius: 10px;
   width: 18vw;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 10px;
 }
 
 .data__statDiv {
@@ -24,7 +28,6 @@
   font-size: 1rem;
   font-weight: 400;
   text-align: center;
-
 }
 
 .data__stat {
@@ -37,7 +40,6 @@
   display: flex;
 }
 
-
 .data_statArrowIcon {
   color: white;
   background: radial-gradient(yellow, orange);
@@ -49,9 +51,19 @@
   width: 5vw;
 }
 
-@media (max-width: 768px){
+.small {
+  width: 50px;
+}
+
+@media (max-width: 800px) {
   .data {
     width: 300px;
     margin-top: 5px;
+  }
+}
+
+@media (max-width: 350px) {
+  .data {
+    width: 200px;
   }
 }
