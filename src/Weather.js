@@ -79,9 +79,11 @@ function Weather() {
     axios
       .request(options)
       .then((response) => {
-        setBackground(
-          response.data.results[Math.floor(Math.random() * 9 + 1)].urls.full
-        );
+        if (response.status === 200) {
+          setBackground(
+            response.data.results[Math.floor(Math.random() * 9 + 1)].urls.full
+          );
+        }
       })
       .catch((error) => {
         console.log(error.message);
