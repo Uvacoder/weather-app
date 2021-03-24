@@ -67,6 +67,11 @@
     width: 200px;
   }
 }
+@media (max-width: 376px) {
+  .data {
+    width: 200px;
+  }
+}
 
 @media (min-width: 1400px) {
   .data {
