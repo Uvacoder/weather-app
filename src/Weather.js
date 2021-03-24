@@ -12,7 +12,7 @@ function Weather() {
   const inputRef = useRef(null);
   const time = new Date().toLocaleTimeString().slice(0, -6);
   const [image, setImage] = useState("");
-  const degree = <sup>°C</sup>
+  const degree = <sup>°C</sup>;
   const minTemp = (
     <p>
       {weatherInfo?.main.temp_min} {degree}
@@ -131,7 +131,7 @@ function Weather() {
         <div className="weather__right">
           <h1 className="weather__title">
             <center>Today's Highlights</center>
-            </h1>
+          </h1>
           <div className="weather__rightInfo">
             <Data
               title="Wind Status"
