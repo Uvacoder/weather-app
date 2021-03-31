@@ -10,6 +10,10 @@
   margin: auto;
   margin-top: 15vh;
   width: 80%;
+  box-shadow: 10px 10px 10px -3px rgba(48, 46, 46, 0.75);
+  -webkit-box-shadow: 10px 10px 10px -3px rgba(158, 143, 143, 0.75);
+  -moz-box-shadow: 10px 10px 10px -3px rgba(158, 143, 143, 0.75);
+  border-radius: 20px;
 }
 
 .weather__left {
